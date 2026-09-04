@@ -4,7 +4,8 @@ import DemoForm from "@/components/DemoForm";
 import Screenshot from "@/components/Screenshot";
 import signIn from "@/public/screenshots/safari-os-sign-in.png";
 import JsonLd from "@/components/JsonLd";
-import { FAILURES, MODULES, PAIN_STRIP, REGION, SECURITY } from "@/lib/content";
+import { CORE_MODULE_COUNT, FAILURES, MODULES, PAIN_STRIP, REGION, SECURITY } from "@/lib/content";
+import { SHOTS } from "@/lib/shots";
 import { SITE, abs } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -29,13 +30,22 @@ const homeGraph = {
       publisher: { "@id": abs("/#organization") },
       inLanguage: "en",
       featureList: MODULES.map((m) => m.fullTitle),
-      screenshot: {
-        "@type": "ImageObject",
-        url: abs("/screenshots/safari-os-sign-in.png"),
-        caption: "The Safari OS operator sign-in screen",
-        width: 1440,
-        height: 900,
-      },
+      screenshot: [
+        {
+          "@type": "ImageObject",
+          url: abs("/screenshots/dashboard.jpg"),
+          caption: "The Safari OS operations dashboard",
+          width: 1920,
+          height: 1200,
+        },
+        {
+          "@type": "ImageObject",
+          url: abs("/screenshots/bookings-pipeline.jpg"),
+          caption: "The Safari OS booking pipeline",
+          width: 1920,
+          height: 1200,
+        },
+      ],
       audience: {
         "@type": "BusinessAudience",
         audienceType: "Safari and tour operators in Kenya, Tanzania and Uganda",
@@ -54,11 +64,8 @@ const homeGraph = {
   ],
 };
 
-const kanban = [
-  { col: "ENQUIRY", items: ["Ochieng party · 6 pax", "Hoffmann · 2 pax"] },
-  { col: "QUOTED", items: ["Mara · 7 nights"] },
-  { col: "CONFIRMED", items: ["Amboseli · 4 pax"] },
-];
+/** The home grid shows the lifecycle spine; /features shows all 21. */
+const coreModules = MODULES.slice(0, CORE_MODULE_COUNT);
 
 export default function HomePage() {
   return (
@@ -109,6 +116,13 @@ export default function HomePage() {
         </ul>
       </section>
 
+      <section className="wrap" style={{ paddingTop: 0 }}>
+        <Screenshot
+          {...SHOTS.dashboard}
+          caption="The operations dashboard. Screenshots are of the real product, running on demonstration data."
+        />
+      </section>
+
       <section className="wrap">
         <p className="kicker" style={{ margin: "0 0 16px" }}>
           The daily failures
@@ -140,7 +154,7 @@ export default function HomePage() {
         <p className="kicker" style={{ margin: "0 0 16px" }}>
           The platform
         </p>
-        <h2>Eleven modules, one thread from enquiry to invoice.</h2>
+        <h2>Twenty-one modules, one thread from enquiry to invoice.</h2>
         <p className="lede" style={{ marginBottom: 40 }}>
           Each one replaces a place work currently disappears into.
         </p>
@@ -152,7 +166,7 @@ export default function HomePage() {
             gap: 20,
           }}
         >
-          {MODULES.map((m, i) => (
+          {coreModules.map((m, i) => (
             <article
               key={m.n}
               className="card"
@@ -167,45 +181,8 @@ export default function HomePage() {
               </p>
 
               {i === 0 ? (
-                <div
-                  aria-hidden="true"
-                  style={{
-                    display: "grid",
-                    gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))",
-                    gap: 12,
-                    marginTop: 24,
-                  }}
-                >
-                  {kanban.map((k) => (
-                    <div
-                      key={k.col}
-                      style={{
-                        border: "1px solid var(--line)",
-                        borderRadius: 10,
-                        padding: 14,
-                        background: "var(--surface-2)",
-                      }}
-                    >
-                      <div className="eyebrow" style={{ marginBottom: 10 }}>
-                        {k.col}
-                      </div>
-                      {k.items.map((it) => (
-                        <div
-                          key={it}
-                          style={{
-                            background: "var(--surface)",
-                            border: "1px solid var(--line)",
-                            borderRadius: 7,
-                            padding: "9px 11px",
-                            fontSize: 13,
-                            marginBottom: 8,
-                          }}
-                        >
-                          {it}
-                        </div>
-                      ))}
-                    </div>
-                  ))}
+                <div style={{ marginTop: 24 }}>
+                  <Screenshot {...SHOTS["bookings-pipeline"]} />
                 </div>
               ) : null}
             </article>

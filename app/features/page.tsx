@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import JsonLd from "@/components/JsonLd";
+import Screenshot from "@/components/Screenshot";
+import { SHOTS } from "@/lib/shots";
 import { MODULES } from "@/lib/content";
 import { SITE, abs } from "@/lib/site";
 
@@ -100,7 +102,9 @@ export default function FeaturesPage() {
           Features
         </p>
         <h1>Every module, in detail.</h1>
-        <p className="lede">What each part of Safari OS does, and what it replaces.</p>
+        <p className="lede">
+          What each of the twenty-one modules does, and what it replaces.
+        </p>
       </section>
 
       <section className="wrap" style={{ paddingTop: 0 }}>
@@ -121,6 +125,12 @@ export default function FeaturesPage() {
                   </li>
                 ))}
               </ul>
+
+              {m.shot && SHOTS[m.shot] ? (
+                <div style={{ marginTop: 24 }}>
+                  <Screenshot {...SHOTS[m.shot]} />
+                </div>
+              ) : null}
             </article>
           ))}
         </div>

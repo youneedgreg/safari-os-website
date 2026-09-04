@@ -48,6 +48,23 @@ structural problems first, then the tags:
 - **Accessibility**, which page experience partly measures: skip link, visible
   focus rings, labelled form fields, landmark elements, one `h1` per page.
 
+### Screenshots
+
+`public/screenshots/` holds captures of the real application, taken from
+[youneedgreg/safari-os](https://github.com/youneedgreg/safari-os) running
+locally against a throwaway Postgres database seeded from `prisma/seed.ts` and
+`prisma/seed-tour-data.ts`.
+
+**Every client name, guide name, phone number, email, passport number and
+vehicle registration in these images is invented.** The upstream seed scripts
+are an export of real operational records, so the seeded database was rewritten
+with generated values before a single screenshot was taken, and the whole
+database was then scanned column by column to confirm none of the original data
+survived. Do not replace these with captures from a live workspace.
+
+Alt text lives in `lib/shots.ts` alongside each image, and modules reference an
+image by key through `Module.shot` in `lib/content.ts`.
+
 ### Before launch
 
 1. **Set the real domain.** `NEXT_PUBLIC_SITE_URL` (see `.env.example`) drives

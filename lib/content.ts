@@ -19,7 +19,16 @@ export type Module = {
   standfirst: string;
   /** Features-page bullets. */
   points: string[];
+  /** Basename of a screenshot in public/screenshots, when one exists. */
+  shot?: string;
 };
+
+/**
+ * The home page shows the first CORE_MODULE_COUNT modules — the lifecycle
+ * spine, in the order the design canvas laid them out. /features shows all of
+ * them. Keep the core block first in the array.
+ */
+export const CORE_MODULE_COUNT = 11;
 
 export const MODULES: Module[] = [
   {
@@ -29,6 +38,7 @@ export const MODULES: Module[] = [
     summary:
       "Every enquiry moves through a kanban board — enquiry, quoted, provisionally booked, confirmed, completed. A website enquiry inbox ingests form submissions from your own site and holds them for approval before they enter the pipeline.",
     fullTitle: "Bookings & Quotes",
+    shot: "bookings-pipeline",
     standfirst: "The pipeline the whole business runs against.",
     points: [
       "Kanban board through ENQUIRY → QUOTED → PROVISIONALLY BOOKED → CONFIRMED → COMPLETED.",
@@ -57,6 +67,7 @@ export const MODULES: Module[] = [
     summary:
       "Itineraries generated with Claude and published to a client portal as a travel-magazine layout.",
     fullTitle: "AI Itinerary Builder",
+    shot: "itineraries",
     standfirst: "Drafted in minutes, published as a document you would be happy to send.",
     points: [
       "Day-by-day itineraries generated with Claude.",
@@ -167,10 +178,140 @@ export const MODULES: Module[] = [
     title: "Who is where, on what date",
     summary: "Vehicle and guide assignments laid across dates, so nothing double-books.",
     fullTitle: "Operations Calendar & Tour Schedule",
+    shot: "tour-schedule",
     standfirst: "The whole season on one grid.",
     points: [
       "Vehicle and guide assignments across dates.",
       "Conflicts visible before they become double-bookings.",
+    ],
+  },
+
+  // Beyond the lifecycle spine. These ship in the product but were not on the
+  // original design canvas, so they appear on /features rather than the home
+  // grid — see CORE_MODULE_COUNT.
+  {
+    n: "12",
+    kicker: "CLIENT DIRECTORY",
+    title: "Everyone you have ever carried",
+    summary:
+      "Client profiles with passport and document storage, full booking history, and the WhatsApp thread attached to each one.",
+    fullTitle: "Client Directory",
+    shot: "clients",
+    standfirst: "The record that outlives any one booking.",
+    points: [
+      "Profiles with passport and document storage.",
+      "Complete booking history per client.",
+      "WhatsApp message history with sentiment tracking.",
+    ],
+  },
+  {
+    n: "13",
+    kicker: "SUPPLIER DATABASE",
+    title: "Every lodge, camp and park",
+    summary:
+      "A registry of lodges, camps, transport companies, parks, activity providers and flight partners, with the contact who actually answers.",
+    fullTitle: "Supplier Database",
+    shot: "suppliers",
+    standfirst: "The other half of every itinerary.",
+    points: [
+      "Categorised by lodge, camp, transport, park, activity or flight.",
+      "Named contact, email and phone per supplier.",
+      "Linked to the costs they appear in.",
+    ],
+  },
+  {
+    n: "14",
+    kicker: "ACCOUNTS PAYABLE",
+    title: "What you owe, per trip",
+    summary:
+      "Lodge and supplier invoices reconciled against the margin you quoted, so a trip cannot quietly close thinner than it looked.",
+    fullTitle: "Accounts Payable",
+    standfirst: "The side of the ledger that usually goes unwatched.",
+    points: [
+      "Supplier invoices reconciled against quoted margin.",
+      "Tracks what is owed to each supplier, per booking.",
+      "Unpaid supplier costs on completed trips surface as alerts.",
+    ],
+  },
+  {
+    n: "15",
+    kicker: "EXPENSES",
+    title: "The costs that are not a lodge bill",
+    summary: "Internal expense tracking, so overheads sit alongside trip costs rather than in a separate book.",
+    fullTitle: "Expenses",
+    standfirst: "Overheads in the same place as everything else.",
+    points: ["Internal expense records.", "Visible against the same reporting as trip costs."],
+  },
+  {
+    n: "16",
+    kicker: "TASKS",
+    title: "The follow-up, assigned",
+    summary:
+      "Internal tasks tagged by priority and by category — finance, operations, client — and assigned to a named person rather than a group chat.",
+    fullTitle: "Tasks",
+    standfirst: "Nobody's to-do note, somebody's task.",
+    points: [
+      "Priority levels: low, medium, high.",
+      "Categories: finance, operations, client, general.",
+      "Assignable to a team member.",
+    ],
+  },
+  {
+    n: "17",
+    kicker: "VOUCHERS",
+    title: "What the guest hands over",
+    summary: "Lodge vouchers carrying the guest name and the lodge's own contact details, generated against the booking.",
+    fullTitle: "Vouchers",
+    standfirst: "The document the lodge actually asks for at check-in.",
+    points: ["Guest name and lodge contact on every voucher.", "Generated against the booking record."],
+  },
+  {
+    n: "18",
+    kicker: "TOUR TEMPLATES",
+    title: "The routes you run again",
+    summary:
+      "Your repeat itineraries kept as templates, so the eleventh Mara-Nakuru-Amboseli quote does not start from an empty page.",
+    fullTitle: "Tour Templates",
+    standfirst: "Stop rebuilding the same eight days.",
+    points: ["Reusable tour definitions.", "Applied to a booking as a starting point."],
+  },
+  {
+    n: "19",
+    kicker: "CAMPAIGNS",
+    title: "Email to the right segment",
+    summary:
+      "Broadcast email with audience segmentation, scheduled sends, and delivery counts tracked per campaign.",
+    fullTitle: "Campaigns",
+    standfirst: "The past-guest list, actually used.",
+    points: [
+      "Audience segmentation by saved criteria.",
+      "Scheduled sends.",
+      "Sent and failed counts tracked per campaign.",
+    ],
+  },
+  {
+    n: "20",
+    kicker: "REPORTS",
+    title: "The season, counted",
+    summary: "Revenue and operations analytics across the bookings you have already entered.",
+    fullTitle: "Reports",
+    standfirst: "Answers without exporting anything.",
+    points: ["Revenue reporting with charts.", "Reads the same records ops works in daily."],
+  },
+  {
+    n: "21",
+    kicker: "SETTINGS & SECURITY",
+    title: "Who can see what",
+    summary:
+      "Business profile, bank and M-Pesa accounts, exchange rates, team roles, per-user 2FA and an immutable security log.",
+    fullTitle: "Settings & Security",
+    standfirst: "The controls behind everything above.",
+    points: [
+      "Business profile, bank accounts and M-Pesa details.",
+      "Team management across ADMIN, OPS and GUIDE roles.",
+      "Per-user two-factor authentication.",
+      "Immutable security audit log of every auth event.",
+      "Notification preferences per event type.",
     ],
   },
 ];
