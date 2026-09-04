@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import DemoForm from "@/components/DemoForm";
+import Screenshot from "@/components/Screenshot";
+import signIn from "@/public/screenshots/safari-os-sign-in.png";
 import JsonLd from "@/components/JsonLd";
 import { FAILURES, MODULES, PAIN_STRIP, REGION, SECURITY } from "@/lib/content";
 import { SITE, abs } from "@/lib/site";
@@ -27,6 +29,13 @@ const homeGraph = {
       publisher: { "@id": abs("/#organization") },
       inLanguage: "en",
       featureList: MODULES.map((m) => m.fullTitle),
+      screenshot: {
+        "@type": "ImageObject",
+        url: abs("/screenshots/safari-os-sign-in.png"),
+        caption: "The Safari OS operator sign-in screen",
+        width: 1440,
+        height: 900,
+      },
       audience: {
         "@type": "BusinessAudience",
         audienceType: "Safari and tour operators in Kenya, Tanzania and Uganda",
@@ -242,19 +251,34 @@ export default function HomePage() {
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(230px, 1fr))",
-            gap: 20,
+            gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+            gap: 40,
             marginTop: 40,
+            alignItems: "start",
           }}
         >
-          {SECURITY.map((s) => (
-            <article key={s.title} className="card">
-              <h3 style={{ fontSize: 18 }}>{s.title}</h3>
-              <p style={{ margin: 0, fontSize: 15, lineHeight: 1.5, color: "var(--muted)" }}>
-                {s.body}
-              </p>
-            </article>
-          ))}
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
+              gap: 20,
+            }}
+          >
+            {SECURITY.map((s) => (
+              <article key={s.title} className="card">
+                <h3 style={{ fontSize: 18 }}>{s.title}</h3>
+                <p style={{ margin: 0, fontSize: 15, lineHeight: 1.5, color: "var(--muted)" }}>
+                  {s.body}
+                </p>
+              </article>
+            ))}
+          </div>
+
+          <Screenshot
+            src={signIn}
+            alt="The Safari OS sign-in screen, showing the email and password fields for an operator workspace."
+            caption="Every workspace sits behind its own sign-in, with per-user 2FA available."
+          />
         </div>
       </section>
 
