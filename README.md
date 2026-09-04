@@ -51,9 +51,12 @@ structural problems first, then the tags:
 ### Before launch
 
 1. **Set the real domain.** `NEXT_PUBLIC_SITE_URL` (see `.env.example`) drives
-   every canonical tag, Open Graph URL, the sitemap and `robots.txt`. It
-   defaults to `https://safari-os.com` — if that is not the production origin,
-   the canonicals will point at the wrong host.
+   every canonical tag, Open Graph URL, the sitemap and `robots.txt`. A bare
+   domain is fine — the scheme is added — and an unset or empty value falls back
+   to `https://safari-os.com` rather than failing the build. That fallback is
+   the trap: if `https://safari-os.com` is not the production origin, the build
+   will still succeed while every canonical points at the wrong host. Check one
+   after deploying.
 2. **Wire up demo requests.** `deliver()` in `lib/enquiry.ts` currently writes
    the enquiry to the server log and returns success. Nothing is emailed yet.
    Replace it with a real transport before taking traffic.

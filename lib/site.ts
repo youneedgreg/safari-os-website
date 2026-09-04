@@ -4,11 +4,36 @@
  * Open Graph URLs, JSON-LD, the sitemap and robots.txt at once.
  */
 
+const DEFAULT_SITE_URL = "https://safari-os.com";
+
+/**
+ * Resolves the canonical origin from the environment.
+ *
+ * Deliberately tolerant, because this value has to survive however it gets set
+ * on a hosting dashboard: an empty string (which `??` would happily pass
+ * through to `new URL()`), a bare domain with no scheme, or a trailing path.
+ * Anything unusable falls back to the default rather than failing the build —
+ * a wrong canonical is recoverable, a site that will not deploy is not.
+ */
+function resolveSiteUrl(): string {
+  const raw = process.env.NEXT_PUBLIC_SITE_URL?.trim();
+  if (!raw) return DEFAULT_SITE_URL;
+
+  const candidate = /^https?:\/\//i.test(raw) ? raw : `https://${raw}`;
+  try {
+    const parsed = new URL(candidate);
+    // Origin only — abs() supplies the path.
+    return `${parsed.protocol}//${parsed.host}`;
+  } catch {
+    return DEFAULT_SITE_URL;
+  }
+}
+
 export const SITE = {
   name: "Safari OS",
   /** Legal/alternate name used in the design's lockup. */
   alternateName: "SAWAS",
-  url: (process.env.NEXT_PUBLIC_SITE_URL ?? "https://safari-os.com").replace(/\/$/, ""),
+  url: resolveSiteUrl(),
   email: "hello@safari-os.com",
   locality: "Nairobi",
   country: "KE",
