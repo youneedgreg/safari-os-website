@@ -32,7 +32,7 @@ function resolveSiteUrl(): string {
 export const SITE = {
   name: "Safari OS",
   /** Legal/alternate name used in the design's lockup. */
-  alternateName: "SAWAS",
+  alternateName: "SAFOS",
   url: resolveSiteUrl(),
   email: "hello@safari-os.com",
   locality: "Nairobi",
@@ -51,7 +51,22 @@ export function abs(path = "/"): string {
 
 /** Every indexable route, in the order they should appear in the sitemap. */
 export const ROUTES = [
-  { path: "/", label: "Overview", priority: 1.0, changeFrequency: "monthly" as const },
-  { path: "/features", label: "Features", priority: 0.9, changeFrequency: "monthly" as const },
-  { path: "/contact", label: "Contact", priority: 0.8, changeFrequency: "yearly" as const },
+  {
+    path: "/",
+    label: "Overview",
+    priority: 1.0,
+    changeFrequency: "monthly" as const,
+  },
+  {
+    path: "/features",
+    label: "Features",
+    priority: 0.9,
+    changeFrequency: "monthly" as const,
+  },
+  {
+    path: "/contact",
+    label: "Contact",
+    priority: 0.8,
+    changeFrequency: "yearly" as const,
+  },
 ];

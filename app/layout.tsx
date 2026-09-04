@@ -124,11 +124,18 @@ const siteGraph = {
  * never flashes the other palette. Small enough to stay inline; anything larger
  * belongs in a real script.
  */
-const noFlashTheme = `try{var t=localStorage.getItem("sawas-site-theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}`;
+const noFlashTheme = `try{var t=localStorage.getItem("SAFOS-site-theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}`;
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
-    <html lang="en" className={`${serif.variable} ${sans.variable} ${mono.variable}`}>
+    <html
+      lang="en"
+      className={`${serif.variable} ${sans.variable} ${mono.variable}`}
+    >
       <head>
         <script dangerouslySetInnerHTML={{ __html: noFlashTheme }} />
       </head>

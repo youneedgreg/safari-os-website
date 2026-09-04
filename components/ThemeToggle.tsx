@@ -4,8 +4,12 @@ import { useEffect, useState } from "react";
 
 type Theme = "system" | "light" | "dark";
 
-const KEY = "sawas-site-theme";
-const NEXT: Record<Theme, Theme> = { system: "light", light: "dark", dark: "system" };
+const KEY = "SAFOS-site-theme";
+const NEXT: Record<Theme, Theme> = {
+  system: "light",
+  light: "dark",
+  dark: "system",
+};
 const ICON: Record<Theme, string> = { system: "◐", light: "☀", dark: "☾" };
 const LABEL: Record<Theme, string> = {
   system: "Theme: follow system. Switch to light.",
@@ -27,7 +31,8 @@ export default function ThemeToggle() {
   useEffect(() => {
     try {
       const saved = localStorage.getItem(KEY) as Theme | null;
-      if (saved === "light" || saved === "dark" || saved === "system") setTheme(saved);
+      if (saved === "light" || saved === "dark" || saved === "system")
+        setTheme(saved);
     } catch {
       /* storage blocked — stay on system */
     }

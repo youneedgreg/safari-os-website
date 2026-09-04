@@ -1,6 +1,6 @@
 # Safari OS — website
 
-Marketing site for Safari OS (SAWAS), built from the Claude Design canvas in
+Marketing site for Safari OS (SAFOS), built from the Claude Design canvas in
 [`design/`](design/) as a statically rendered Next.js App Router site.
 
 ```
@@ -12,13 +12,13 @@ npm run typecheck
 
 ## Layout
 
-| Path | What it is |
-| --- | --- |
-| `design/` | The imported Claude Design canvas — the visual source of truth. Not built or type-checked. |
-| `lib/site.ts` | Canonical origin, product identity, route table. Everything SEO reads. |
-| `lib/content.ts` | All page copy, lifted verbatim from the canvas. |
-| `app/` | Three indexable routes (`/`, `/features`, `/contact`) plus `robots.ts`, `sitemap.ts`, `icon.svg`, `opengraph-image.tsx`. |
-| `components/` | Header, footer, theme toggle, demo form, JSON-LD helper. |
+| Path             | What it is                                                                                                               |
+| ---------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| `design/`        | The imported Claude Design canvas — the visual source of truth. Not built or type-checked.                               |
+| `lib/site.ts`    | Canonical origin, product identity, route table. Everything SEO reads.                                                   |
+| `lib/content.ts` | All page copy, lifted verbatim from the canvas.                                                                          |
+| `app/`           | Three indexable routes (`/`, `/features`, `/contact`) plus `robots.ts`, `sitemap.ts`, `icon.svg`, `opengraph-image.tsx`. |
+| `components/`    | Header, footer, theme toggle, demo form, JSON-LD helper.                                                                 |
 
 ## SEO
 
