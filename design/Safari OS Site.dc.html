@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,300;6..72,400;6..72,500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  html { scroll-behavior: smooth; color-scheme: light dark; }
+  body { margin: 0; background: light-dark(#F7F9F8, #0A0E0C); color: light-dark(#0B120F, #E9EFEC); font-family: "IBM Plex Sans", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+  * { box-sizing: border-box; }
+  a { color: light-dark(#15803D, #22C55E); text-decoration: none; }
+  a:hover { color: light-dark(#116330, #34D96F); }
+  input, select, textarea, button { font: inherit; }
+</style>
+</helmet>
+
+<div style="min-height: 100vh; background: light-dark(#F7F9F8, #0A0E0C); color: light-dark(#0B120F, #E9EFEC);">
+
+  <header style="position: sticky; top: 0; z-index: 50; background: light-dark(rgba(247,249,248,0.9), rgba(10,14,12,0.88)); backdrop-filter: blur(12px); border-bottom: 1px solid light-dark(#E1E7E4, #1B2420);">
+    <div style="max-width: 1180px; margin: 0 auto; padding: 0 24px; height: 68px; display: flex; align-items: center; justify-content: space-between; gap: 20px;">
+      <div onClick="{{ goHome }}" style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
+        <div style="width: 26px; height: 26px; border-radius: 7px; background: light-dark(#15803D, #22C55E); display: grid; place-items: center;">
+          <div style="width: 9px; height: 9px; border-radius: 50%; background: light-dark(#DCFCE7, #04120A);"></div>
+        </div>
+        <span style="font-family: 'Newsreader', serif; font-size: 19px; letter-spacing: -0.01em;">Safari OS</span>
+      </div>
+      <nav style="display: flex; align-items: center; gap: 22px;">
+        <span onClick="{{ goHome }}" style="cursor: pointer; font-size: 14px; color: light-dark(#5C665F, #8C978F);" style-hover="color: light-dark(#0B120F, #E9EFEC);">Overview</span>
+        <span onClick="{{ goFeatures }}" style="cursor: pointer; font-size: 14px; color: light-dark(#5C665F, #8C978F);" style-hover="color: light-dark(#0B120F, #E9EFEC);">Features</span>
+        <span onClick="{{ goContact }}" style="cursor: pointer; font-size: 14px; color: light-dark(#5C665F, #8C978F);" style-hover="color: light-dark(#0B120F, #E9EFEC);">Contact</span>
+        <span onClick="{{ toggleTheme }}" title="Switch theme" style="cursor: pointer; width: 30px; height: 30px; border-radius: 8px; border: 1px solid light-dark(#DDE4E0, #26312C); display: grid; place-items: center; font-size: 13px; color: light-dark(#5C665F, #8C978F);" style-hover="border-color: light-dark(#15803D, #22C55E); color: light-dark(#15803D, #22C55E);">{{ themeIcon }}</span>
+        <span onClick="{{ goContact }}" style="cursor: pointer; background: light-dark(#15803D, #22C55E); color: light-dark(#FFFFFF, #04120A); font-size: 14px; font-weight: 600; padding: 9px 16px; border-radius: 8px;" style-hover="background: light-dark(#116330, #34D96F);">Book a demo</span>
+      </nav>
+    </div>
+  </header>
+
+  <sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+  <main>
+
+    <section style="max-width: 1180px; margin: 0 auto; padding: 96px 24px 72px;">
+      <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: light-dark(#15803D, #22C55E); margin-bottom: 28px;">Safari OS · SAWAS</div>
+      <h1 style="font-family: 'Newsreader', serif; font-weight: 400; font-size: clamp(42px, 7vw, 82px); line-height: 1.02; letter-spacing: -0.025em; margin: 0 0 28px; max-width: 16ch;">The operating system for safari operators.</h1>
+      <p style="font-size: clamp(17px, 2.2vw, 21px); line-height: 1.55; color: light-dark(#5C665F, #8C978F); max-width: 60ch; margin: 0 0 40px; text-wrap: pretty;">One platform for the whole booking lifecycle — enquiry, quote, costing, itinerary, invoice, driver dispatch and post-trip marketing. Instead of an inbox, a spreadsheet and a WhatsApp group.</p>
+      <div style="display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 64px;">
+        <span onClick="{{ goContact }}" style="cursor: pointer; background: light-dark(#15803D, #22C55E); color: light-dark(#FFFFFF, #04120A); font-weight: 600; font-size: 15px; padding: 14px 26px; border-radius: 8px;" style-hover="background: light-dark(#116330, #34D96F);">Book a demo</span>
+        <a href="#how" style="color: light-dark(#0B120F, #E9EFEC); font-weight: 500; font-size: 15px; padding: 14px 26px; border-radius: 8px; border: 1px solid light-dark(#DDE4E0, #26312C);" style-hover="border-color: light-dark(#15803D, #22C55E); color: light-dark(#0B120F, #E9EFEC);">See how it works</a>
+      </div>
+
+      <sc-if value="{{ showPainStrip }}" hint-placeholder-val="{{ true }}">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 1px; background: light-dark(#E1E7E4, #1B2420); border: 1px solid light-dark(#E1E7E4, #1B2420); border-radius: 12px; overflow: hidden;">
+        <div style="background: light-dark(#FFFFFF, #101614); padding: 22px 24px;">
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.1em; color: light-dark(#8A938C, #6A746D); margin-bottom: 10px;">TODAY</div>
+          <div style="font-size: 15px; line-height: 1.45; color: light-dark(#2B3630, #C4CEC8);">Enquiries sit unanswered at the bottom of an inbox.</div>
+        </div>
+        <div style="background: light-dark(#FFFFFF, #101614); padding: 22px 24px;">
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.1em; color: light-dark(#8A938C, #6A746D); margin-bottom: 10px;">TODAY</div>
+          <div style="font-size: 15px; line-height: 1.45; color: light-dark(#2B3630, #C4CEC8);">Costing lives in a spreadsheet only one person understands.</div>
+        </div>
+        <div style="background: light-dark(#FFFFFF, #101614); padding: 22px 24px;">
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.1em; color: light-dark(#8A938C, #6A746D); margin-bottom: 10px;">TODAY</div>
+          <div style="font-size: 15px; line-height: 1.45; color: light-dark(#2B3630, #C4CEC8);">Drivers are briefed on WhatsApp, then go dark for four days.</div>
+        </div>
+      </div>
+      </sc-if>
+    </section>
+
+    <section style="background: light-dark(#0B120F, #0E1512); color: light-dark(#EAF0ED, #E9EFEC); padding: 88px 0; border-top: 1px solid light-dark(#0B120F, #1B2420); border-bottom: 1px solid light-dark(#0B120F, #1B2420);">
+      <div style="max-width: 1180px; margin: 0 auto; padding: 0 24px;">
+        <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: #22C55E; margin-bottom: 22px;">The daily failures</div>
+        <h2 style="font-family: 'Newsreader', serif; font-weight: 400; font-size: clamp(30px, 4.4vw, 46px); line-height: 1.12; letter-spacing: -0.02em; margin: 0 0 52px; max-width: 22ch;">Nothing breaks loudly. It breaks at the gate.</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 28px;">
+          <div style="border-top: 1px solid light-dark(#28332D, #24302A); padding-top: 22px;">
+            <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: light-dark(#6D786F, #6A746D); margin-bottom: 14px;">01</div>
+            <h3 style="font-size: 17px; font-weight: 600; margin: 0 0 10px; letter-spacing: -0.01em;">The same vehicle, twice</h3>
+            <p style="margin: 0; font-size: 15px; line-height: 1.55; color: light-dark(#98A29B, #8C978F);">Two itineraries overlap by one day and nobody notices until both clients are at the airport.</p>
+          </div>
+          <div style="border-top: 1px solid light-dark(#28332D, #24302A); padding-top: 22px;">
+            <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: light-dark(#6D786F, #6A746D); margin-bottom: 14px;">02</div>
+            <h3 style="font-size: 17px; font-weight: 600; margin: 0 0 10px; letter-spacing: -0.01em;">An expired PSV licence</h3>
+            <p style="margin: 0; font-size: 15px; line-height: 1.55; color: light-dark(#98A29B, #8C978F);">Discovered at the park gate, with guests in the vehicle, because the renewal date lived in someone's head.</p>
+          </div>
+          <div style="border-top: 1px solid light-dark(#28332D, #24302A); padding-top: 22px;">
+            <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: light-dark(#6D786F, #6A746D); margin-bottom: 14px;">03</div>
+            <h3 style="font-size: 17px; font-weight: 600; margin: 0 0 10px; letter-spacing: -0.01em;">The invoice nobody chased</h3>
+            <p style="margin: 0; font-size: 15px; line-height: 1.55; color: light-dark(#98A29B, #8C978F);">The trip is finished, the balance is unpaid, and the follow-up was somebody's to-do note.</p>
+          </div>
+          <div style="border-top: 1px solid light-dark(#28332D, #24302A); padding-top: 22px;">
+            <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: light-dark(#6D786F, #6A746D); margin-bottom: 14px;">04</div>
+            <h3 style="font-size: 17px; font-weight: 600; margin: 0 0 10px; letter-spacing: -0.01em;">Margin that quietly leaked</h3>
+            <p style="margin: 0; font-size: 15px; line-height: 1.55; color: light-dark(#98A29B, #8C978F);">Lodge bills come back higher than quoted, unreconciled, and the trip closes thinner than it looked.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="how" style="max-width: 1180px; margin: 0 auto; padding: 96px 24px 40px;">
+      <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: light-dark(#15803D, #22C55E); margin-bottom: 22px;">The platform</div>
+      <h2 style="font-family: 'Newsreader', serif; font-weight: 400; font-size: clamp(30px, 4.4vw, 46px); line-height: 1.12; letter-spacing: -0.02em; margin: 0 0 18px; max-width: 20ch;">Eleven modules, one thread from enquiry to invoice.</h2>
+      <p style="font-size: 17px; line-height: 1.55; color: light-dark(#5C665F, #8C978F); max-width: 56ch; margin: 0 0 56px;">Each one replaces a place work currently disappears into.</p>
+    </section>
+
+    <section style="max-width: 1180px; margin: 0 auto; padding: 0 24px 40px;">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+
+        <div style="grid-column: 1 / -1; background: light-dark(#FFFFFF, #101614); border: 1px solid light-dark(#E1E7E4, #1F2925); border-radius: 14px; padding: 34px; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 34px; align-items: center;">
+          <div>
+            <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.12em; color: light-dark(#15803D, #22C55E); margin-bottom: 14px;">01 · BOOKINGS &amp; QUOTES</div>
+            <h3 style="font-family: 'Newsreader', serif; font-weight: 400; font-size: 28px; letter-spacing: -0.015em; margin: 0 0 12px;">A pipeline, not an inbox</h3>
+            <p style="margin: 0; font-size: 15.5px; line-height: 1.6; color: light-dark(#5C665F, #8C978F);">Every enquiry moves through a kanban board — enquiry, quoted, provisionally booked, confirmed, completed. A website enquiry inbox ingests form submissions from your own site and holds them for approval before they enter the pipeline.</p>
+          </div>
+          <sc-if value="{{ showKanban }}" hint-placeholder-val="{{ true }}">
+          <div style="display: flex; gap: 8px; overflow: hidden;">
+            <div style="flex: 1; min-width: 0; background: light-dark(#F1F5F3, #0B100E); border: 1px solid light-dark(#E7EDEA, #1B2420); border-radius: 10px; padding: 12px 10px;">
+              <div style="font-family: 'IBM Plex Mono', monospace; font-size: 9.5px; letter-spacing: 0.08em; color: light-dark(#7A857D, #79847C); margin-bottom: 10px;">ENQUIRY</div>
+              <div style="background: light-dark(#FFFFFF, #141B18); border: 1px solid light-dark(#E1E7E4, #232E29); border-radius: 6px; padding: 8px; font-size: 11px; color: light-dark(#2B3630, #C4CEC8); margin-bottom: 6px;">Ochieng party · 6 pax</div>
+              <div style="background: light-dark(#FFFFFF, #141B18); border: 1px solid light-dark(#E1E7E4, #232E29); border-radius: 6px; padding: 8px; font-size: 11px; color: light-dark(#2B3630, #C4CEC8);">Hoffmann · 2 pax</div>
+            </div>
+            <div style="flex: 1; min-width: 0; background: light-dark(#F1F5F3, #0B100E); border: 1px solid light-dark(#E7EDEA, #1B2420); border-radius: 10px; padding: 12px 10px;">
+              <div style="font-family: 'IBM Plex Mono', monospace; font-size: 9.5px; letter-spacing: 0.08em; color: light-dark(#7A857D, #79847C); margin-bottom: 10px;">QUOTED</div>
+              <div style="background: light-dark(#FFFFFF, #141B18); border: 1px solid light-dark(#E1E7E4, #232E29); border-radius: 6px; padding: 8px; font-size: 11px; color: light-dark(#2B3630, #C4CEC8);">Mara · 7 nights</div>
+            </div>
+            <div style="flex: 1; min-width: 0; background: light-dark(#F1F5F3, #0B100E); border: 1px solid light-dark(#E7EDEA, #1B2420); border-radius: 10px; padding: 12px 10px;">
+              <div style="font-family: 'IBM Plex Mono', monospace; font-size: 9.5px; letter-spacing: 0.08em; color: light-dark(#7A857D, #79847C); margin-bottom: 10px;">CONFIRMED</div>
+              <div style="background: light-dark(#DCFCE7, #10301D); border: 1px solid light-dark(#A7E8BF, #1D5334); border-radius: 6px; padding: 8px; font-size: 11px; color: light-dark(#116330, #6EE7A0);">Amboseli · 4 pax</div>
+            </div>
+          </div>
+          </sc-if>
+        </div>
+
+        <div style="background: light-dark(#FFFFFF, #101614); border: 1px solid light-dark(#E1E7E4, #1F2925); border-radius: 14px; padding: 30px;">
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.12em; color: light-dark(#15803D, #22C55E); margin-bottom: 14px;">02 · COSTING ENGINE</div>
+          <h3 style="font-family: 'Newsreader', serif; font-weight: 400; font-size: 24px; letter-spacing: -0.015em; margin: 0 0 10px;">Cost sheets in USD and KES</h3>
+          <p style="margin: 0; font-size: 15px; line-height: 1.6; color: light-dark(#5C665F, #8C978F);">Multi-currency cost sheets with live exchange rate sync, and an AI advisor that flags thin margins before the quote goes out.</p>
+        </div>
+
+        <div style="background: light-dark(#FFFFFF, #101614); border: 1px solid light-dark(#E1E7E4, #1F2925); border-radius: 14px; padding: 30px;">
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.12em; color: light-dark(#15803D, #22C55E); margin-bottom: 14px;">03 · AI ITINERARY BUILDER</div>
+          <h3 style="font-family: 'Newsreader', serif; font-weight: 400; font-size: 24px; letter-spacing: -0.015em; margin: 0 0 10px;">Day-by-day, publish-ready</h3>
+          <p style="margin: 0; font-size: 15px; line-height: 1.6; color: light-dark(#5C665F, #8C978F);">Itineraries generated with Claude and published to a client portal as a travel-magazine layout.</p>
+        </div>
+
+        <div style="background: light-dark(#FFFFFF, #101614); border: 1px solid light-dark(#E1E7E4, #1F2925); border-radius: 14px; padding: 30px;">
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.12em; color: light-dark(#15803D, #22C55E); margin-bottom: 14px;">04 · INVOICING &amp; PAYABLES</div>
+          <h3 style="font-family: 'Newsreader', serif; font-weight: 400; font-size: 24px; letter-spacing: -0.015em; margin: 0 0 10px;">Branded invoices, tracked</h3>
+          <p style="margin: 0; font-size: 15px; line-height: 1.6; color: light-dark(#5C665F, #8C978F);">PDF invoices with VAT, bank transfer and M-Pesa details, payment status tracking, and supplier reconciliation against quoted margin.</p>
+        </div>
+
+        <div style="background: light-dark(#FFFFFF, #101614); border: 1px solid light-dark(#E1E7E4, #1F2925); border-radius: 14px; padding: 30px;">
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.12em; color: light-dark(#15803D, #22C55E); margin-bottom: 14px;">05 · PARTNERS &amp; FLEET</div>
+          <h3 style="font-family: 'Newsreader', serif; font-weight: 400; font-size: 24px; letter-spacing: -0.015em; margin: 0 0 10px;">Nothing expires unnoticed</h3>
+          <p style="margin: 0; font-size: 15px; line-height: 1.6; color: light-dark(#5C665F, #8C978F);">Guide and vehicle registry tracking PSV licence, insurance, guide certification and first aid expiry, with configurable alert windows. One-click WhatsApp driver briefing.</p>
+        </div>
+
+        <div style="background: light-dark(#FFFFFF, #101614); border: 1px solid light-dark(#E1E7E4, #1F2925); border-radius: 14px; padding: 30px;">
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.12em; color: light-dark(#15803D, #22C55E); margin-bottom: 14px;">06 · DRIVER PORTAL</div>
+          <h3 style="font-family: 'Newsreader', serif; font-weight: 400; font-size: 24px; letter-spacing: -0.015em; margin: 0 0 10px;">No login, no app</h3>
+          <p style="margin: 0; font-size: 15px; line-height: 1.6; color: light-dark(#5C665F, #8C978F);">A token-linked page where drivers log live status — airport pickup complete, arrived at lodge — and ops sees it in real time.</p>
+        </div>
+
+        <div style="background: light-dark(#FFFFFF, #101614); border: 1px solid light-dark(#E1E7E4, #1F2925); border-radius: 14px; padding: 30px;">
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.12em; color: light-dark(#15803D, #22C55E); margin-bottom: 14px;">07 · CLIENT PORTAL</div>
+          <h3 style="font-family: 'Newsreader', serif; font-weight: 400; font-size: 24px; letter-spacing: -0.015em; margin: 0 0 10px;">Everything the guest asks for</h3>
+          <p style="margin: 0; font-size: 15px; line-height: 1.6; color: light-dark(#5C665F, #8C978F);">A no-login mobile page with live itinerary, accommodation, packing list, document vault and post-trip feedback.</p>
+        </div>
+
+        <div style="background: light-dark(#FFFFFF, #101614); border: 1px solid light-dark(#E1E7E4, #1F2925); border-radius: 14px; padding: 30px;">
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.12em; color: light-dark(#15803D, #22C55E); margin-bottom: 14px;">08 · WHATSAPP CRM</div>
+          <h3 style="font-family: 'Newsreader', serif; font-weight: 400; font-size: 24px; letter-spacing: -0.015em; margin: 0 0 10px;">The thread, kept</h3>
+          <p style="margin: 0; font-size: 15px; line-height: 1.6; color: light-dark(#5C665F, #8C978F);">Threaded message history against every booking, with automated pre-trip reminders at 30, 14, 7 and 1 day before arrival.</p>
+        </div>
+
+        <div style="background: light-dark(#FFFFFF, #101614); border: 1px solid light-dark(#E1E7E4, #1F2925); border-radius: 14px; padding: 30px;">
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.12em; color: light-dark(#15803D, #22C55E); margin-bottom: 14px;">09 · AI INTELLIGENCE</div>
+          <h3 style="font-family: 'Newsreader', serif; font-weight: 400; font-size: 24px; letter-spacing: -0.015em; margin: 0 0 10px;">Which enquiries are real</h3>
+          <p style="margin: 0; font-size: 15px; line-height: 1.6; color: light-dark(#5C665F, #8C978F);">Conversion scoring — hot, warm, cold — on every enquiry, anomaly alerts for low margins and payment delays, and plain-English querying of your own revenue and arrivals data.</p>
+        </div>
+
+        <div style="background: light-dark(#FFFFFF, #101614); border: 1px solid light-dark(#E1E7E4, #1F2925); border-radius: 14px; padding: 30px;">
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.12em; color: light-dark(#15803D, #22C55E); margin-bottom: 14px;">10 · CONTENT STUDIO</div>
+          <h3 style="font-family: 'Newsreader', serif; font-weight: 400; font-size: 24px; letter-spacing: -0.015em; margin: 0 0 10px;">The trip, marketed again</h3>
+          <p style="margin: 0; font-size: 15px; line-height: 1.6; color: light-dark(#5C665F, #8C978F);">Published itineraries become Instagram posts, blogs, newsletters and brochures in English, German, French and Spanish.</p>
+        </div>
+
+        <div style="background: light-dark(#FFFFFF, #101614); border: 1px solid light-dark(#E1E7E4, #1F2925); border-radius: 14px; padding: 30px;">
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.12em; color: light-dark(#15803D, #22C55E); margin-bottom: 14px;">11 · OPERATIONS CALENDAR</div>
+          <h3 style="font-family: 'Newsreader', serif; font-weight: 400; font-size: 24px; letter-spacing: -0.015em; margin: 0 0 10px;">Who is where, on what date</h3>
+          <p style="margin: 0; font-size: 15px; line-height: 1.6; color: light-dark(#5C665F, #8C978F);">Vehicle and guide assignments laid across dates, so nothing double-books.</p>
+        </div>
+
+      </div>
+      <div style="margin-top: 28px;">
+        <span onClick="{{ goFeatures }}" style="cursor: pointer; font-size: 15px; font-weight: 500; color: light-dark(#15803D, #22C55E); border-bottom: 1px solid light-dark(#A7E8BF, #1D5334); padding-bottom: 2px;" style-hover="color: light-dark(#116330, #34D96F);">See the full module breakdown →</span>
+      </div>
+    </section>
+
+    <section style="max-width: 1180px; margin: 0 auto; padding: 96px 24px;">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 56px;">
+        <div>
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: light-dark(#15803D, #22C55E); margin-bottom: 22px;">Built for the region</div>
+          <h2 style="font-family: 'Newsreader', serif; font-weight: 400; font-size: clamp(30px, 4.4vw, 46px); line-height: 1.12; letter-spacing: -0.02em; margin: 0;">Built for how safaris actually run.</h2>
+        </div>
+        <div style="display: flex; flex-direction: column;">
+          <div style="border-top: 1px solid light-dark(#E1E7E4, #1F2925); padding: 20px 0; display: grid; grid-template-columns: 150px 1fr; gap: 20px;">
+            <div style="font-size: 15px; font-weight: 600;">Dual currency</div>
+            <div style="font-size: 15px; line-height: 1.55; color: light-dark(#5C665F, #8C978F);">Quote, cost and invoice in USD and KES against a live rate.</div>
+          </div>
+          <div style="border-top: 1px solid light-dark(#E1E7E4, #1F2925); padding: 20px 0; display: grid; grid-template-columns: 150px 1fr; gap: 20px;">
+            <div style="font-size: 15px; font-weight: 600;">M-Pesa</div>
+            <div style="font-size: 15px; line-height: 1.55; color: light-dark(#5C665F, #8C978F);">Payment details on every invoice, alongside bank transfer.</div>
+          </div>
+          <div style="border-top: 1px solid light-dark(#E1E7E4, #1F2925); padding: 20px 0; display: grid; grid-template-columns: 150px 1fr; gap: 20px;">
+            <div style="font-size: 15px; font-weight: 600;">Multi-park</div>
+            <div style="font-size: 15px; line-height: 1.55; color: light-dark(#5C665F, #8C978F);">Itineraries that cross Kenya, Tanzania and Uganda in one booking.</div>
+          </div>
+          <div style="border-top: 1px solid light-dark(#E1E7E4, #1F2925); padding: 20px 0; display: grid; grid-template-columns: 150px 1fr; gap: 20px;">
+            <div style="font-size: 15px; font-weight: 600;">WhatsApp-first</div>
+            <div style="font-size: 15px; line-height: 1.55; color: light-dark(#5C665F, #8C978F);">Because that is where clients and drivers already are.</div>
+          </div>
+          <div style="border-top: 1px solid light-dark(#E1E7E4, #1F2925); border-bottom: 1px solid light-dark(#E1E7E4, #1F2925); padding: 20px 0; display: grid; grid-template-columns: 150px 1fr; gap: 20px;">
+            <div style="font-size: 15px; font-weight: 600;">Weak signal</div>
+            <div style="font-size: 15px; line-height: 1.55; color: light-dark(#5C665F, #8C978F);">Zero-login pages for drivers and guests, light enough for the road.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <sc-if value="{{ showSecurity }}" hint-placeholder-val="{{ true }}">
+    <section style="background: light-dark(#0B120F, #0E1512); color: light-dark(#EAF0ED, #E9EFEC); padding: 80px 0; border-top: 1px solid light-dark(#0B120F, #1B2420); border-bottom: 1px solid light-dark(#0B120F, #1B2420);">
+      <div style="max-width: 1180px; margin: 0 auto; padding: 0 24px; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 48px; align-items: start;">
+        <div>
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: #22C55E; margin-bottom: 22px;">Security &amp; roles</div>
+          <h2 style="font-family: 'Newsreader', serif; font-weight: 400; font-size: clamp(28px, 3.6vw, 38px); line-height: 1.14; letter-spacing: -0.02em; margin: 0; max-width: 18ch;">Your commercial data, properly fenced.</h2>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 28px;">
+          <div>
+            <h3 style="font-size: 15px; font-weight: 600; margin: 0 0 8px;">JWT sessions</h3>
+            <p style="margin: 0; font-size: 14.5px; line-height: 1.55; color: light-dark(#98A29B, #8C978F);">Token-based authentication on every request.</p>
+          </div>
+          <div>
+            <h3 style="font-size: 15px; font-weight: 600; margin: 0 0 8px;">Per-user 2FA</h3>
+            <p style="margin: 0; font-size: 14.5px; line-height: 1.55; color: light-dark(#98A29B, #8C978F);">Second factor enforced account by account.</p>
+          </div>
+          <div>
+            <h3 style="font-size: 15px; font-weight: 600; margin: 0 0 8px;">Immutable audit log</h3>
+            <p style="margin: 0; font-size: 14.5px; line-height: 1.55; color: light-dark(#98A29B, #8C978F);">Who changed which price, and when.</p>
+          </div>
+          <div>
+            <h3 style="font-size: 15px; font-weight: 600; margin: 0 0 8px;">Role separation</h3>
+            <p style="margin: 0; font-size: 14.5px; line-height: 1.55; color: light-dark(#98A29B, #8C978F);">ADMIN, OPS and GUIDE see only what they should.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    </sc-if>
+
+    <section style="max-width: 1180px; margin: 0 auto; padding: 96px 24px;">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 56px;">
+        <div>
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: light-dark(#15803D, #22C55E); margin-bottom: 22px;">Book a demo</div>
+          <h2 style="font-family: 'Newsreader', serif; font-weight: 400; font-size: clamp(32px, 4.4vw, 48px); line-height: 1.1; letter-spacing: -0.02em; margin: 0 0 18px; max-width: 16ch;">See it against your own season.</h2>
+          <p style="font-size: 16.5px; line-height: 1.6; color: light-dark(#5C665F, #8C978F); max-width: 44ch; margin: 0 0 24px;">Forty-five minutes, walked through with a real itinerary of yours. We will talk pricing once we know your fleet and volume.</p>
+          <p style="font-size: 15px; line-height: 1.6; color: light-dark(#8A938C, #6A746D); margin: 0;">Prefer email? <a href="mailto:hello@safari-os.com">hello@safari-os.com</a></p>
+        </div>
+        <dc-import name="Demo Form" hint-size="100%,520px"></dc-import>
+      </div>
+    </section>
+
+  </main>
+  </sc-if>
+
+  <sc-if value="{{ isFeatures }}" hint-placeholder-val="{{ false }}">
+  <main>
+    <section style="max-width: 1180px; margin: 0 auto; padding: 84px 24px 64px;">
+      <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: light-dark(#15803D, #22C55E); margin-bottom: 22px;">Features</div>
+      <h1 style="font-family: 'Newsreader', serif; font-weight: 400; font-size: clamp(38px, 6vw, 64px); line-height: 1.05; letter-spacing: -0.025em; margin: 0 0 22px; max-width: 18ch;">Every module, in detail.</h1>
+      <p style="font-size: 18px; line-height: 1.55; color: light-dark(#5C665F, #8C978F); max-width: 56ch; margin: 0;">What each part of Safari OS does, and what it replaces.</p>
+    </section>
+
+    <section style="max-width: 1180px; margin: 0 auto; padding: 0 24px 96px; display: flex; flex-direction: column;">
+
+      <div style="border-top: 1px solid light-dark(#E1E7E4, #1F2925); padding: 40px 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 40px;">
+        <div>
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.12em; color: light-dark(#15803D, #22C55E); margin-bottom: 12px;">01</div>
+          <h2 style="font-family: 'Newsreader', serif; font-weight: 400; font-size: 30px; letter-spacing: -0.02em; margin: 0 0 10px;">Bookings &amp; Quotes</h2>
+          <p style="margin: 0; font-size: 15.5px; line-height: 1.6; color: light-dark(#5C665F, #8C978F);">The pipeline the whole business runs against.</p>
+        </div>
+        <ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 12px;">
+          <li style="font-size: 15.5px; line-height: 1.55; color: light-dark(#2B3630, #C4CEC8); padding-left: 18px; border-left: 2px solid light-dark(#E1E7E4, #1F2925);">Kanban board through ENQUIRY → QUOTED → PROVISIONALLY BOOKED → CONFIRMED → COMPLETED.</li>
+          <li style="font-size: 15.5px; line-height: 1.55; color: light-dark(#2B3630, #C4CEC8); padding-left: 18px; border-left: 2px solid light-dark(#E1E7E4, #1F2925);">Website enquiry inbox that ingests form submissions from your own site.</li>
+          <li style="font-size: 15.5px; line-height: 1.55; color: light-dark(#2B3630, #C4CEC8); padding-left: 18px; border-left: 2px solid light-dark(#E1E7E4, #1F2925);">Submissions held for approval before they enter the pipeline.</li>
+        </ul>
+      </div>
+
+      <div style="border-top: 1px solid light-dark(#E1E7E4, #1F2925); padding: 40px 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 40px;">
+        <div>
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.12em; color: light-dark(#15803D, #22C55E); margin-bottom: 12px;">02</div>
+          <h2 style="font-family: 'Newsreader', serif; font-weight: 400; font-size: 30px; letter-spacing: -0.02em; margin: 0 0 10px;">Costing Engine</h2>
+          <p style="margin: 0; font-size: 15.5px; line-height: 1.6; color: light-dark(#5C665F, #8C978F);">Margin known before the quote leaves.</p>
+        </div>
+        <ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 12px;">
+          <li style="font-size: 15.5px; line-height: 1.55; color: light-dark(#2B3630, #C4CEC8); padding-left: 18px; border-left: 2px solid light-dark(#E1E7E4, #1F2925);">Multi-currency cost sheets in USD and KES.</li>
+          <li style="font-size: 15.5px; line-height: 1.55; color: light-dark(#2B3630, #C4CEC8); padding-left: 18px; border-left: 2px solid light-dark(#E1E7E4, #1F2925);">Live exchange rate sync.</li>
+          <li style="font-size: 15.5px; line-height: 1.55; color: light-dark(#2B3630, #C4CEC8); padding-left: 18px; border-left: 2px solid light-dark(#E1E7E4, #1F2925);">AI advisor that flags thin margins before you quote.</li>
+        </ul>
+      </div>
+
+      <div style="border-top: 1px solid light-dark(#E1E7E4, #1F2925); padding: 40px 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 40px;">
+        <div>
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.12em; color: light-dark(#15803D, #22C55E); margin-bottom: 12px;">03</div>
+          <h2 style="font-family: 'Newsreader', serif; font-weight: 400; font-size: 30px; letter-spacing: -0.02em; margin: 0 0 10px;">AI Itinerary Builder</h2>
+          <p style="margin: 0; font-size: 15.5px; line-height: 1.6; color: light-dark(#5C665F, #8C978F);">Drafted in minutes, published as a document you would be happy to send.</p>
+        </div>
+        <ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 12px;">
+          <li style="font-size: 15.5px; line-height: 1.55; color: light-dark(#2B3630, #C4CEC8); padding-left: 18px; border-left: 2px solid light-dark(#E1E7E4, #1F2925);">Day-by-day itineraries generated with Claude.</li>
+          <li style="font-size: 15.5px; line-height: 1.55; color: light-dark(#2B3630, #C4CEC8); padding-left: 18px; border-left: 2px solid light-dark(#E1E7E4, #1F2925);">Published to the client portal as a travel-magazine layout.</li>
+        </ul>
+      </div>
+
+      <div style="border-top: 1px solid light-dark(#E1E7E4, #1F2925); padding: 40px 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 40px;">
+        <div>
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.12em; color: light-dark(#15803D, #22C55E); margin-bottom: 12px;">04</div>
+          <h2 style="font-family: 'Newsreader', serif; font-weight: 400; font-size: 30px; letter-spacing: -0.02em; margin: 0 0 10px;">Invoicing &amp; Payables</h2>
+          <p style="margin: 0; font-size: 15.5px; line-height: 1.6; color: light-dark(#5C665F, #8C978F);">Money out the door, and money owed, in one place.</p>
+        </div>
+        <ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 12px;">
+          <li style="font-size: 15.5px; line-height: 1.55; color: light-dark(#2B3630, #C4CEC8); padding-left: 18px; border-left: 2px solid light-dark(#E1E7E4, #1F2925);">Branded PDF invoices with VAT.</li>
+          <li style="font-size: 15.5px; line-height: 1.55; color: light-dark(#2B3630, #C4CEC8); padding-left: 18px; border-left: 2px solid light-dark(#E1E7E4, #1F2925);">Bank transfer and M-Pesa payment details.</li>
+          <li style="font-size: 15.5px; line-height: 1.55; color: light-dark(#2B3630, #C4CEC8); padding-left: 18px; border-left: 2px solid light-dark(#E1E7E4, #1F2925);">Payment status tracking.</li>
+          <li style="font-size: 15.5px; line-height: 1.55; color: light-dark(#2B3630, #C4CEC8); padding-left: 18px; border-left: 2px solid light-dark(#E1E7E4, #1F2925);">Supplier reconciliation against quoted margin.</li>
+        </ul>
+      </div>
+
+      <div style="border-top: 1px solid light-dark(#E1E7E4, #1F2925); padding: 40px 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 40px;">
+        <div>
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.12em; color: light-dark(#15803D, #22C55E); margin-bottom: 12px;">05</div>
+          <h2 style="font-family: 'Newsreader', serif; font-weight: 400; font-size: 30px; letter-spacing: -0.02em; margin: 0 0 10px;">Partners &amp; Fleet</h2>
+          <p style="margin: 0; font-size: 15.5px; line-height: 1.6; color: light-dark(#5C665F, #8C978F);">Compliance that warns you in advance, not at the gate.</p>
+        </div>
+        <ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 12px;">
+          <li style="font-size: 15.5px; line-height: 1.55; color: light-dark(#2B3630, #C4CEC8); padding-left: 18px; border-left: 2px solid light-dark(#E1E7E4, #1F2925);">Guide and vehicle registry.</li>
+          <li style="font-size: 15.5px; line-height: 1.55; color: light-dark(#2B3630, #C4CEC8); padding-left: 18px; border-left: 2px solid light-dark(#E1E7E4, #1F2925);">Expiry tracking for PSV licence, insurance, guide certification and first aid.</li>
+          <li style="font-size: 15.5px; line-height: 1.55; color: light-dark(#2B3630, #C4CEC8); padding-left: 18px; border-left: 2px solid light-dark(#E1E7E4, #1F2925);">Configurable alert windows.</li>
+          <li style="font-size: 15.5px; line-height: 1.55; color: light-dark(#2B3630, #C4CEC8); padding-left: 18px; border-left: 2px solid light-dark(#E1E7E4, #1F2925);">One-click WhatsApp driver briefing.</li>
+        </ul>
+      </div>
+
+      <div style="border-top: 1px solid light-dark(#E1E7E4, #1F2925); padding: 40px 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 40px;">
+        <div>
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.12em; color: light-dark(#15803D, #22C55E); margin-bottom: 12px;">06</div>
+          <h2 style="font-family: 'Newsreader', serif; font-weight: 400; font-size: 30px; letter-spacing: -0.02em; margin: 0 0 10px;">Driver Portal</h2>
+          <p style="margin: 0; font-size: 15.5px; line-height: 1.6; color: light-dark(#5C665F, #8C978F);">Visibility from a phone with no app and no password.</p>
+        </div>
+        <ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 12px;">
+          <li style="font-size: 15.5px; line-height: 1.55; color: light-dark(#2B3630, #C4CEC8); padding-left: 18px; border-left: 2px solid light-dark(#E1E7E4, #1F2925);">No-login, token-linked page per driver.</li>
+          <li style="font-size: 15.5px; line-height: 1.55; color: light-dark(#2B3630, #C4CEC8); padding-left: 18px; border-left: 2px solid light-dark(#E1E7E4, #1F2925);">Live status logging — "Airport pickup complete", "Arrived at lodge".</li>
+          <li style="font-size: 15.5px; line-height: 1.55; color: light-dark(#2B3630, #C4CEC8); padding-left: 18px; border-left: 2px solid light-dark(#E1E7E4, #1F2925);">Ops sees updates in real time.</li>
+        </ul>
+      </div>
+
+      <div style="border-top: 1px solid light-dark(#E1E7E4, #1F2925); padding: 40px 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 40px;">
+        <div>
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.12em; color: light-dark(#15803D, #22C55E); margin-bottom: 12px;">07</div>
+          <h2 style="font-family: 'Newsreader', serif; font-weight: 400; font-size: 30px; letter-spacing: -0.02em; margin: 0 0 10px;">Client Portal</h2>
+          <p style="margin: 0; font-size: 15.5px; line-height: 1.6; color: light-dark(#5C665F, #8C978F);">One link that answers the questions guests would otherwise email you.</p>
+        </div>
+        <ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 12px;">
+          <li style="font-size: 15.5px; line-height: 1.55; color: light-dark(#2B3630, #C4CEC8); padding-left: 18px; border-left: 2px solid light-dark(#E1E7E4, #1F2925);">No-login mobile page with the live itinerary.</li>
+          <li style="font-size: 15.5px; line-height: 1.55; color: light-dark(#2B3630, #C4CEC8); padding-left: 18px; border-left: 2px solid light-dark(#E1E7E4, #1F2925);">Accommodation details and packing list.</li>
+          <li style="font-size: 15.5px; line-height: 1.55; color: light-dark(#2B3630, #C4CEC8); padding-left: 18px; border-left: 2px solid light-dark(#E1E7E4, #1F2925);">Document vault and post-trip feedback.</li>
+        </ul>
+      </div>
+
+      <div style="border-top: 1px solid light-dark(#E1E7E4, #1F2925); padding: 40px 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 40px;">
+        <div>
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.12em; color: light-dark(#15803D, #22C55E); margin-bottom: 12px;">08</div>
+          <h2 style="font-family: 'Newsreader', serif; font-weight: 400; font-size: 30px; letter-spacing: -0.02em; margin: 0 0 10px;">WhatsApp CRM</h2>
+          <p style="margin: 0; font-size: 15.5px; line-height: 1.6; color: light-dark(#5C665F, #8C978F);">The conversation, attached to the booking.</p>
+        </div>
+        <ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 12px;">
+          <li style="font-size: 15.5px; line-height: 1.55; color: light-dark(#2B3630, #C4CEC8); padding-left: 18px; border-left: 2px solid light-dark(#E1E7E4, #1F2925);">Threaded message history.</li>
+          <li style="font-size: 15.5px; line-height: 1.55; color: light-dark(#2B3630, #C4CEC8); padding-left: 18px; border-left: 2px solid light-dark(#E1E7E4, #1F2925);">Automated pre-trip reminders at 30, 14, 7 and 1 day before arrival.</li>
+        </ul>
+      </div>
+
+      <div style="border-top: 1px solid light-dark(#E1E7E4, #1F2925); padding: 40px 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 40px;">
+        <div>
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.12em; color: light-dark(#15803D, #22C55E); margin-bottom: 12px;">09</div>
+          <h2 style="font-family: 'Newsreader', serif; font-weight: 400; font-size: 30px; letter-spacing: -0.02em; margin: 0 0 10px;">AI Intelligence</h2>
+          <p style="margin: 0; font-size: 15.5px; line-height: 1.6; color: light-dark(#5C665F, #8C978F);">Attention pointed at the right enquiry and the right anomaly.</p>
+        </div>
+        <ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 12px;">
+          <li style="font-size: 15.5px; line-height: 1.55; color: light-dark(#2B3630, #C4CEC8); padding-left: 18px; border-left: 2px solid light-dark(#E1E7E4, #1F2925);">Conversion scoring — HOT, WARM, COLD — on every enquiry.</li>
+          <li style="font-size: 15.5px; line-height: 1.55; color: light-dark(#2B3630, #C4CEC8); padding-left: 18px; border-left: 2px solid light-dark(#E1E7E4, #1F2925);">Anomaly alerts for low margins and payment delays.</li>
+          <li style="font-size: 15.5px; line-height: 1.55; color: light-dark(#2B3630, #C4CEC8); padding-left: 18px; border-left: 2px solid light-dark(#E1E7E4, #1F2925);">Plain-English querying of your own revenue and arrivals data.</li>
+        </ul>
+      </div>
+
+      <div style="border-top: 1px solid light-dark(#E1E7E4, #1F2925); padding: 40px 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 40px;">
+        <div>
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.12em; color: light-dark(#15803D, #22C55E); margin-bottom: 12px;">10</div>
+          <h2 style="font-family: 'Newsreader', serif; font-weight: 400; font-size: 30px; letter-spacing: -0.02em; margin: 0 0 10px;">Content Studio</h2>
+          <p style="margin: 0; font-size: 15.5px; line-height: 1.6; color: light-dark(#5C665F, #8C978F);">Marketing material out of work you have already done.</p>
+        </div>
+        <ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 12px;">
+          <li style="font-size: 15.5px; line-height: 1.55; color: light-dark(#2B3630, #C4CEC8); padding-left: 18px; border-left: 2px solid light-dark(#E1E7E4, #1F2925);">Turns published itineraries into Instagram posts, blogs, newsletters and brochures.</li>
+          <li style="font-size: 15.5px; line-height: 1.55; color: light-dark(#2B3630, #C4CEC8); padding-left: 18px; border-left: 2px solid light-dark(#E1E7E4, #1F2925);">Output in English, German, French and Spanish.</li>
+        </ul>
+      </div>
+
+      <div style="border-top: 1px solid light-dark(#E1E7E4, #1F2925); border-bottom: 1px solid light-dark(#E1E7E4, #1F2925); padding: 40px 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 40px;">
+        <div>
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.12em; color: light-dark(#15803D, #22C55E); margin-bottom: 12px;">11</div>
+          <h2 style="font-family: 'Newsreader', serif; font-weight: 400; font-size: 30px; letter-spacing: -0.02em; margin: 0 0 10px;">Operations Calendar &amp; Tour Schedule</h2>
+          <p style="margin: 0; font-size: 15.5px; line-height: 1.6; color: light-dark(#5C665F, #8C978F);">The whole season on one grid.</p>
+        </div>
+        <ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 12px;">
+          <li style="font-size: 15.5px; line-height: 1.55; color: light-dark(#2B3630, #C4CEC8); padding-left: 18px; border-left: 2px solid light-dark(#E1E7E4, #1F2925);">Vehicle and guide assignments across dates.</li>
+          <li style="font-size: 15.5px; line-height: 1.55; color: light-dark(#2B3630, #C4CEC8); padding-left: 18px; border-left: 2px solid light-dark(#E1E7E4, #1F2925);">Conflicts visible before they become double-bookings.</li>
+        </ul>
+      </div>
+
+      <div style="margin-top: 56px; background: light-dark(#0B120F, #101614); border: 1px solid light-dark(#0B120F, #1F2925); border-radius: 16px; padding: 48px; display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 32px; align-items: center;">
+        <h2 style="font-family: 'Newsreader', serif; font-weight: 400; color: light-dark(#EAF0ED, #E9EFEC); font-size: 34px; line-height: 1.14; letter-spacing: -0.02em; margin: 0;">Walk through it with your own season.</h2>
+        <div style="display: flex; gap: 12px; flex-wrap: wrap; justify-self: start;">
+          <span onClick="{{ goContact }}" style="cursor: pointer; background: #22C55E; color: #04120A; font-weight: 600; font-size: 15px; padding: 14px 26px; border-radius: 8px;" style-hover="background: #34D96F;">Book a demo</span>
+          <span onClick="{{ goContact }}" style="cursor: pointer; color: light-dark(#EAF0ED, #E9EFEC); font-weight: 500; font-size: 15px; padding: 14px 26px; border-radius: 8px; border: 1px solid light-dark(#2A352F, #26312C);" style-hover="border-color: #22C55E;">Request pricing</span>
+        </div>
+      </div>
+
+    </section>
+  </main>
+  </sc-if>
+
+  <sc-if value="{{ isContact }}" hint-placeholder-val="{{ false }}">
+  <main>
+    <section style="max-width: 1180px; margin: 0 auto; padding: 84px 24px 96px; display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 64px; align-items: start;">
+      <div>
+        <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: light-dark(#15803D, #22C55E); margin-bottom: 22px;">Contact</div>
+        <h1 style="font-family: 'Newsreader', serif; font-weight: 400; font-size: clamp(36px, 5.4vw, 58px); line-height: 1.05; letter-spacing: -0.025em; margin: 0 0 22px; max-width: 14ch;">Book a demo.</h1>
+        <p style="font-size: 17px; line-height: 1.6; color: light-dark(#5C665F, #8C978F); max-width: 46ch; margin: 0 0 36px;">Tell us how you operate today and we will show you the same workflow inside Safari OS. Pricing is quoted after we understand your fleet and monthly volume.</p>
+        <div style="display: flex; flex-direction: column; gap: 18px; border-top: 1px solid light-dark(#E1E7E4, #1F2925); padding-top: 26px;">
+          <div style="display: grid; grid-template-columns: 110px 1fr; gap: 16px;">
+            <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.1em; color: light-dark(#8A938C, #6A746D); padding-top: 3px;">EMAIL</div>
+            <a href="mailto:hello@safari-os.com" style="font-size: 15.5px;">hello@safari-os.com</a>
+          </div>
+          <div style="display: grid; grid-template-columns: 110px 1fr; gap: 16px;">
+            <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.1em; color: light-dark(#8A938C, #6A746D); padding-top: 3px;">BASED IN</div>
+            <div style="font-size: 15.5px; color: light-dark(#2B3630, #C4CEC8);">Nairobi, Kenya</div>
+          </div>
+          <div style="display: grid; grid-template-columns: 110px 1fr; gap: 16px;">
+            <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.1em; color: light-dark(#8A938C, #6A746D); padding-top: 3px;">DEMO</div>
+            <div style="font-size: 15.5px; color: light-dark(#2B3630, #C4CEC8);">45 minutes, over video, with a real itinerary of yours.</div>
+          </div>
+        </div>
+      </div>
+      <dc-import name="Demo Form" hint-size="100%,520px"></dc-import>
+    </section>
+  </main>
+  </sc-if>
+
+  <footer style="border-top: 1px solid light-dark(#E1E7E4, #1B2420); background: light-dark(#F1F5F3, #0C1210);">
+    <div style="max-width: 1180px; margin: 0 auto; padding: 44px 24px; display: flex; flex-wrap: wrap; gap: 24px; align-items: center; justify-content: space-between;">
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <div style="width: 22px; height: 22px; border-radius: 6px; background: light-dark(#15803D, #22C55E); display: grid; place-items: center;">
+          <div style="width: 8px; height: 8px; border-radius: 50%; background: light-dark(#DCFCE7, #04120A);"></div>
+        </div>
+        <span style="font-family: 'Newsreader', serif; font-size: 17px;">Safari OS</span>
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: light-dark(#8A938C, #6A746D); letter-spacing: 0.1em;">SAWAS</span>
+      </div>
+      <div style="display: flex; gap: 26px; align-items: center; flex-wrap: wrap;">
+        <span onClick="{{ goHome }}" style="cursor: pointer; font-size: 14px; color: light-dark(#5C665F, #8C978F);" style-hover="color: light-dark(#0B120F, #E9EFEC);">Overview</span>
+        <span onClick="{{ goFeatures }}" style="cursor: pointer; font-size: 14px; color: light-dark(#5C665F, #8C978F);" style-hover="color: light-dark(#0B120F, #E9EFEC);">Features</span>
+        <span onClick="{{ goContact }}" style="cursor: pointer; font-size: 14px; color: light-dark(#5C665F, #8C978F);" style-hover="color: light-dark(#0B120F, #E9EFEC);">Contact</span>
+        <a href="mailto:hello@safari-os.com" style="font-size: 14px;">hello@safari-os.com</a>
+      </div>
+      <div style="font-size: 13px; color: light-dark(#8A938C, #6A746D);">© 2026 Safari OS</div>
+    </div>
+  </footer>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;showKanbanPreview&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Home&quot;},&quot;heroPainStrip&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Home&quot;},&quot;showSecuritySection&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Home&quot;}}">
+class Component extends DCLogic {
+  state = { page: "home", theme: "system" };
+  componentDidMount() {
+    try {
+      const saved = localStorage.getItem("sawas-site-theme");
+      if (saved) this.setState({ theme: saved });
+    } catch (e) {}
+  }
+  go(page) {
+    this.setState({ page }, () => window.scrollTo({ top: 0, behavior: "instant" }));
+  }
+  cycleTheme() {
+    const order = { system: "light", light: "dark", dark: "system" };
+    const next = order[this.state.theme] || "system";
+    this.setState({ theme: next });
+    try { localStorage.setItem("sawas-site-theme", next); } catch (e) {}
+  }
+  renderVals() {
+    const p = this.state.page;
+    const t = this.state.theme;
+    const scheme = t === "light" ? "light only" : t === "dark" ? "dark only" : "light dark";
+    if (typeof document !== "undefined") document.documentElement.style.colorScheme = scheme;
+    return {
+      isHome: p === "home",
+      isFeatures: p === "features",
+      isContact: p === "contact",
+      showKanban: this.props.showKanbanPreview ?? true,
+      showPainStrip: this.props.heroPainStrip ?? true,
+      showSecurity: this.props.showSecuritySection ?? true,
+      scheme: scheme,
+      themeIcon: t === "light" ? "☀" : t === "dark" ? "☾" : "◐",
+      toggleTheme: () => this.cycleTheme(),
+      goHome: () => this.go("home"),
+      goFeatures: () => this.go("features"),
+      goContact: () => this.go("contact")
+    };
+  }
+}
+</script>
+</body>
+</html>
