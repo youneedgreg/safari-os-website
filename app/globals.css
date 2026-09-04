@@ -1,0 +1,245 @@
+/*
+ * Design tokens ported from design/Safari OS Site.dc.html.
+ * The canvas used light-dark() inline on every element; here the same palette
+ * lives in custom properties so the markup stays semantic and small — which is
+ * what crawlers and Core Web Vitals both reward.
+ *
+ * Three theme states, matching the canvas's system/light/dark cycle:
+ *   :root                                  -> light
+ *   prefers-color-scheme: dark, unforced   -> dark
+ *   [data-theme="dark"|"light"]            -> explicit user choice, wins either way
+ */
+
+:root {
+  color-scheme: light;
+
+  --bg: #f7f9f8;
+  --fg: #0b120f;
+  --muted: #5c665f;
+  --faint: #8a938c;
+  --accent: #15803d;
+  --accent-hover: #116330;
+  --on-accent: #ffffff;
+  --accent-soft: #dcfce7;
+  --line: #e1e7e4;
+  --line-strong: #dde4e0;
+  --surface: #ffffff;
+  --surface-2: #f1f5f3;
+  --header-bg: rgba(247, 249, 248, 0.9);
+
+  --serif: var(--font-serif), Newsreader, Georgia, "Times New Roman", serif;
+  --sans: var(--font-sans), "IBM Plex Sans", system-ui, -apple-system, sans-serif;
+  --mono: var(--font-mono), "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+
+  --maxw: 1180px;
+  --pad: 24px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+
+    --bg: #0a0e0c;
+    --fg: #e9efec;
+    --muted: #8c978f;
+    --faint: #6a746d;
+    --accent: #22c55e;
+    --accent-hover: #34d96f;
+    --on-accent: #04120a;
+    --accent-soft: #04120a;
+    --line: #1b2420;
+    --line-strong: #26312c;
+    --surface: #101614;
+    --surface-2: #121815;
+    --header-bg: rgba(10, 14, 12, 0.88);
+  }
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  --bg: #0a0e0c;
+  --fg: #e9efec;
+  --muted: #8c978f;
+  --faint: #6a746d;
+  --accent: #22c55e;
+  --accent-hover: #34d96f;
+  --on-accent: #04120a;
+  --accent-soft: #04120a;
+  --line: #1b2420;
+  --line-strong: #26312c;
+  --surface: #101614;
+  --surface-2: #121815;
+  --header-bg: rgba(10, 14, 12, 0.88);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--accent-hover);
+}
+
+input,
+select,
+textarea,
+button {
+  font: inherit;
+}
+
+/* A visible focus ring is a real accessibility requirement, and keyboard
+   operability is part of what page-experience signals measure. */
+:where(a, button, input, select, textarea, [tabindex]):focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 100;
+  background: var(--accent);
+  color: var(--on-accent);
+  padding: 12px 18px;
+  border-radius: 0 0 8px 0;
+  font-weight: 600;
+}
+
+.skip-link:focus {
+  left: 0;
+  color: var(--on-accent);
+}
+
+.wrap {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding-inline: var(--pad);
+}
+
+.kicker {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.eyebrow {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: var(--faint);
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--serif);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+h1 {
+  font-size: clamp(42px, 7vw, 82px);
+  line-height: 1.02;
+  letter-spacing: -0.025em;
+  margin: 0 0 28px;
+}
+
+h2 {
+  font-size: clamp(28px, 4vw, 44px);
+  line-height: 1.1;
+  margin: 0 0 20px;
+}
+
+h3 {
+  font-size: 20px;
+  line-height: 1.25;
+  margin: 0 0 10px;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+.lede {
+  font-size: clamp(17px, 2.2vw, 21px);
+  line-height: 1.55;
+  color: var(--muted);
+  max-width: 60ch;
+  margin: 0 0 40px;
+}
+
+.btn {
+  display: inline-block;
+  background: var(--accent);
+  color: var(--on-accent);
+  font-weight: 600;
+  font-size: 15px;
+  padding: 14px 26px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background: var(--accent-hover);
+  color: var(--on-accent);
+}
+
+.btn-ghost {
+  display: inline-block;
+  color: var(--fg);
+  font-weight: 500;
+  font-size: 15px;
+  padding: 14px 26px;
+  border-radius: 8px;
+  border: 1px solid var(--line-strong);
+}
+
+.btn-ghost:hover {
+  border-color: var(--accent);
+  color: var(--fg);
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 24px;
+}
+
+section {
+  padding-block: 72px;
+}
+
+section:first-of-type {
+  padding-top: 96px;
+}
